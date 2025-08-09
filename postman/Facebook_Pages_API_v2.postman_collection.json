@@ -1,0 +1,409 @@
+{
+  "info": {
+    "name": "Facebook Pages API v2",
+    "description": "Updated collection for testing Facebook Pages API endpoints with flexible authentication (access_token parameter or Authorization header)",
+    "version": "2.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string",
+      "description": "Base URL of the Facebook Pages API server"
+    },
+    {
+      "key": "pageId",
+      "value": "471958375999732",
+      "type": "string",
+      "description": "Facebook Page ID for testing"
+    },
+    {
+      "key": "postId",
+      "value": "471958375999732_122109395630612603",
+      "type": "string",
+      "description": "Facebook Post ID for testing comments"
+    },
+    {
+      "key": "commentId",
+      "value": "122109395630612603_433721156285059",
+      "type": "string",
+      "description": "Facebook Comment ID for testing"
+    },
+    {
+      "key": "accessToken",
+      "value": "YOUR_PAGE_ACCESS_TOKEN_HERE",
+      "type": "string",
+      "description": "Facebook Page Access Token"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API server is running and healthy. No authentication required."
+      }
+    },
+    {
+      "name": "Authentication Examples",
+      "item": [
+        {
+          "name": "Get Page (Query Parameter)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}?access_token={{accessToken}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}"],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{accessToken}}",
+                  "description": "Pass access token as query parameter"
+                }
+              ]
+            },
+            "description": "Example: Authentication using access_token query parameter"
+          }
+        },
+        {
+          "name": "Get Page (Authorization Header)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}",
+                "description": "Pass access token in Authorization header"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}"]
+            },
+            "description": "Example: Authentication using Authorization Bearer header"
+          }
+        },
+        {
+          "name": "Get Page (Environment Variable)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}"]
+            },
+            "description": "Example: Authentication using server's environment variable (PAGE_ACCESS_TOKEN)"
+          }
+        }
+      ],
+      "description": "Examples showing different authentication methods"
+    },
+    {
+      "name": "Pages",
+      "item": [
+        {
+          "name": "Get Page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}?fields=id,name,category,about,phone,website,picture",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}"],
+              "query": [
+                {
+                  "key": "fields",
+                  "value": "id,name,category,about,phone,website,picture",
+                  "description": "Optional: Comma-separated list of fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific Facebook page"
+          }
+        },
+        {
+          "name": "Get All Pages",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages"]
+            },
+            "description": "Get a list of all pages accessible with the current access token"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get Page Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}/posts?limit=10&fields=id,message,created_time,type,permalink_url",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}", "posts"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of posts to retrieve (default: 10)"
+                },
+                {
+                  "key": "fields",
+                  "value": "id,message,created_time,type,permalink_url",
+                  "description": "Optional: Comma-separated list of fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get posts from a specific Facebook page"
+          }
+        },
+        {
+          "name": "Get Page Posts (Query Auth)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/pages/{{pageId}}/posts?access_token={{accessToken}}&limit=5&fields=id,message,created_time",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "pages", "{{pageId}}", "posts"],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{accessToken}}",
+                  "description": "Authentication via query parameter"
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of posts to retrieve"
+                },
+                {
+                  "key": "fields",
+                  "value": "id,message,created_time",
+                  "description": "Fields to retrieve"
+                }
+              ]
+            },
+            "description": "Example: Get posts using query parameter authentication"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Get Post Comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/{{postId}}/comments?limit=10&order=reverse_chronological&fields=id,message,created_time,from",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "posts", "{{postId}}", "comments"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of comments to retrieve (default: 10)"
+                },
+                {
+                  "key": "order",
+                  "value": "reverse_chronological",
+                  "description": "Order of comments (default: reverse_chronological)"
+                },
+                {
+                  "key": "fields",
+                  "value": "id,message,created_time,from",
+                  "description": "Optional: Comma-separated list of fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get comments for a specific post"
+          }
+        },
+        {
+          "name": "Get Single Comment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/comments/{{commentId}}?fields=id,message,created_time,from,like_count",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "comments", "{{commentId}}"],
+              "query": [
+                {
+                  "key": "fields",
+                  "value": "id,message,created_time,from,like_count",
+                  "description": "Optional: Comma-separated list of fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get details of a specific comment"
+          }
+        },
+        {
+          "name": "Get Comment Replies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/comments/{{commentId}}/replies?limit=5&fields=id,message,created_time,from",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "comments", "{{commentId}}", "replies"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of replies to retrieve (default: 10)"
+                },
+                {
+                  "key": "fields",
+                  "value": "id,message,created_time,from",
+                  "description": "Optional: Comma-separated list of fields to retrieve"
+                }
+              ]
+            },
+            "description": "Get replies to a specific comment"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mixed Authentication Examples",
+      "item": [
+        {
+          "name": "Comments with Query Auth",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/posts/{{postId}}/comments?access_token={{accessToken}}&limit=3",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "posts", "{{postId}}", "comments"],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{accessToken}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "3"
+                }
+              ]
+            },
+            "description": "Get comments using access_token query parameter"
+          }
+        },
+        {
+          "name": "Comment Replies with Header Auth",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/comments/{{commentId}}/replies?limit=2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "comments", "{{commentId}}", "replies"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Get comment replies using Authorization header"
+          }
+        }
+      ],
+      "description": "Examples showing different authentication methods for various endpoints"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Pre-request script",
+          "console.log('API Request to:', pm.request.url.toString());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Test script for all requests",
+          "pm.test('Response status code is successful', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+          "});",
+          "",
+          "pm.test('Response time is less than 10000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(10000);",
+          "});",
+          "",
+          "pm.test('Response has JSON content-type', function () {",
+          "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+          "});",
+          "",
+          "// Log response for debugging",
+          "console.log('Response:', pm.response.json());"
+        ]
+      }
+    }
+  ]
+}
