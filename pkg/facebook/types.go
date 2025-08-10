@@ -16,13 +16,13 @@ func (ft *FacebookTime) UnmarshalJSON(data []byte) error {
 	if timeStr == "null" || timeStr == "" {
 		return nil
 	}
-	
+
 	// Facebook uses format: "2006-01-02T15:04:05+0000"
 	parsedTime, err := time.Parse("2006-01-02T15:04:05-0700", timeStr)
 	if err != nil {
 		return err
 	}
-	
+
 	ft.Time = parsedTime
 	return nil
 }
@@ -51,29 +51,29 @@ type ErrorDetail struct {
 
 // Page represents a Facebook page
 type Page struct {
-	ID               string    `json:"id"`
-	Name             string    `json:"name"`
-	Category         string    `json:"category"`
-	CategoryList     []Category `json:"category_list,omitempty"`
-	About            string    `json:"about,omitempty"`
-	Description      string    `json:"description,omitempty"`
-	Website          string    `json:"website,omitempty"`
-	Phone            string    `json:"phone,omitempty"`
-	Email            string    `json:"email,omitempty"`
-	Username         string    `json:"username,omitempty"`
-	Link             string    `json:"link,omitempty"`
-	FanCount         int       `json:"fan_count,omitempty"`
-	FollowersCount   int       `json:"followers_count,omitempty"`
-	CheckinsCount    int       `json:"checkins,omitempty"`
-	TalkingAboutCount int      `json:"talking_about_count,omitempty"`
-	Picture          Picture   `json:"picture,omitempty"`
-	CoverPhoto       CoverPhoto `json:"cover,omitempty"`
-	Location         Location  `json:"location,omitempty"`
-	Hours            Hours     `json:"hours,omitempty"`
-	IsPublished      bool      `json:"is_published,omitempty"`
-	IsVerified       bool      `json:"is_verified,omitempty"`
-	CanPost          bool      `json:"can_post,omitempty"`
-	AccessToken      string    `json:"access_token,omitempty"`
+	ID                string     `json:"id"`
+	Name              string     `json:"name"`
+	Category          string     `json:"category"`
+	CategoryList      []Category `json:"category_list,omitempty"`
+	About             string     `json:"about,omitempty"`
+	Description       string     `json:"description,omitempty"`
+	Website           string     `json:"website,omitempty"`
+	Phone             string     `json:"phone,omitempty"`
+	Email             string     `json:"email,omitempty"`
+	Username          string     `json:"username,omitempty"`
+	Link              string     `json:"link,omitempty"`
+	FanCount          int        `json:"fan_count,omitempty"`
+	FollowersCount    int        `json:"followers_count,omitempty"`
+	CheckinsCount     int        `json:"checkins,omitempty"`
+	TalkingAboutCount int        `json:"talking_about_count,omitempty"`
+	Picture           Picture    `json:"picture,omitempty"`
+	CoverPhoto        CoverPhoto `json:"cover,omitempty"`
+	Location          Location   `json:"location,omitempty"`
+	Hours             Hours      `json:"hours,omitempty"`
+	IsPublished       bool       `json:"is_published,omitempty"`
+	IsVerified        bool       `json:"is_verified,omitempty"`
+	CanPost           bool       `json:"can_post,omitempty"`
+	AccessToken       string     `json:"access_token,omitempty"`
 }
 
 // Category represents a page category
@@ -97,21 +97,21 @@ type PictureData struct {
 
 // CoverPhoto represents page cover photo
 type CoverPhoto struct {
-	ID       string `json:"id"`
-	Source   string `json:"source"`
-	OffsetY  int    `json:"offset_y"`
-	OffsetX  int    `json:"offset_x"`
+	ID      string `json:"id"`
+	Source  string `json:"source"`
+	OffsetY int    `json:"offset_y"`
+	OffsetX int    `json:"offset_x"`
 }
 
 // Location represents page location
 type Location struct {
-	Street     string  `json:"street,omitempty"`
-	City       string  `json:"city,omitempty"`
-	State      string  `json:"state,omitempty"`
-	Country    string  `json:"country,omitempty"`
-	Zip        string  `json:"zip,omitempty"`
-	Latitude   float64 `json:"latitude,omitempty"`
-	Longitude  float64 `json:"longitude,omitempty"`
+	Street    string  `json:"street,omitempty"`
+	City      string  `json:"city,omitempty"`
+	State     string  `json:"state,omitempty"`
+	Country   string  `json:"country,omitempty"`
+	Zip       string  `json:"zip,omitempty"`
+	Latitude  float64 `json:"latitude,omitempty"`
+	Longitude float64 `json:"longitude,omitempty"`
 }
 
 // Hours represents page hours
@@ -127,24 +127,24 @@ type Hours struct {
 
 // Post represents a Facebook page post
 type Post struct {
-	ID           string    `json:"id"`
-	Message      string    `json:"message,omitempty"`
-	Story        string    `json:"story,omitempty"`
-	Link         string    `json:"link,omitempty"`
-	Name         string    `json:"name,omitempty"`
-	Caption      string    `json:"caption,omitempty"`
-	Description  string    `json:"description,omitempty"`
-	Picture      string    `json:"picture,omitempty"`
-	Source       string    `json:"source,omitempty"`
-	Type         string    `json:"type,omitempty"`
-	StatusType   string    `json:"status_type,omitempty"`
-	CreatedTime  FacebookTime `json:"created_time"`
-	UpdatedTime  FacebookTime `json:"updated_time,omitempty"`
-	Permalink    string    `json:"permalink_url,omitempty"`
-	IsPublished  bool      `json:"is_published,omitempty"`
-	IsHidden     bool      `json:"is_hidden,omitempty"`
-	Privacy      Privacy   `json:"privacy,omitempty"`
-	Actions      []Action  `json:"actions,omitempty"`
+	ID          string       `json:"id"`
+	Message     string       `json:"message,omitempty"`
+	Story       string       `json:"story,omitempty"`
+	Link        string       `json:"link,omitempty"`
+	Name        string       `json:"name,omitempty"`
+	Caption     string       `json:"caption,omitempty"`
+	Description string       `json:"description,omitempty"`
+	Picture     string       `json:"picture,omitempty"`
+	Source      string       `json:"source,omitempty"`
+	Type        string       `json:"type,omitempty"`
+	StatusType  string       `json:"status_type,omitempty"`
+	CreatedTime FacebookTime `json:"created_time"`
+	UpdatedTime FacebookTime `json:"updated_time,omitempty"`
+	Permalink   string       `json:"permalink_url,omitempty"`
+	IsPublished bool         `json:"is_published,omitempty"`
+	IsHidden    bool         `json:"is_hidden,omitempty"`
+	Privacy     Privacy      `json:"privacy,omitempty"`
+	Actions     []Action     `json:"actions,omitempty"`
 }
 
 // Privacy represents post privacy settings
@@ -170,22 +170,22 @@ type PostResponse struct {
 
 // PhotoResponse represents the response when uploading a photo
 type PhotoResponse struct {
-	ID       string `json:"id"`
-	PostID   string `json:"post_id,omitempty"`
+	ID     string `json:"id"`
+	PostID string `json:"post_id,omitempty"`
 }
 
 // Photo represents a Facebook photo
 type Photo struct {
-	ID          string    `json:"id"`
-	Name        string    `json:"name,omitempty"`
-	Picture     string    `json:"picture,omitempty"`
-	Source      string    `json:"source,omitempty"`
+	ID          string       `json:"id"`
+	Name        string       `json:"name,omitempty"`
+	Picture     string       `json:"picture,omitempty"`
+	Source      string       `json:"source,omitempty"`
 	CreatedTime FacebookTime `json:"created_time"`
 	UpdatedTime FacebookTime `json:"updated_time,omitempty"`
-	Link        string    `json:"link,omitempty"`
-	Album       Album     `json:"album,omitempty"`
-	Width       int       `json:"width,omitempty"`
-	Height      int       `json:"height,omitempty"`
+	Link        string       `json:"link,omitempty"`
+	Album       Album        `json:"album,omitempty"`
+	Width       int          `json:"width,omitempty"`
+	Height      int          `json:"height,omitempty"`
 }
 
 // Album represents a photo album
@@ -196,9 +196,9 @@ type Album struct {
 
 // PagingData represents pagination information
 type PagingData struct {
-	Cursors Cursors `json:"cursors,omitempty"`
-	Previous string `json:"previous,omitempty"`
-	Next     string `json:"next,omitempty"`
+	Cursors  Cursors `json:"cursors,omitempty"`
+	Previous string  `json:"previous,omitempty"`
+	Next     string  `json:"next,omitempty"`
 }
 
 // Cursors represents pagination cursors
@@ -215,18 +215,18 @@ type PostsResponse struct {
 
 // Insight represents page insights data
 type Insight struct {
-	Name        string      `json:"name"`
-	Period      string      `json:"period"`
-	Values      []Value     `json:"values"`
-	Title       string      `json:"title,omitempty"`
-	Description string      `json:"description,omitempty"`
-	ID          string      `json:"id,omitempty"`
+	Name        string  `json:"name"`
+	Period      string  `json:"period"`
+	Values      []Value `json:"values"`
+	Title       string  `json:"title,omitempty"`
+	Description string  `json:"description,omitempty"`
+	ID          string  `json:"id,omitempty"`
 }
 
 // Value represents insight values
 type Value struct {
-	Value   interface{} `json:"value"`
-	EndTime FacebookTime   `json:"end_time"`
+	Value   interface{}  `json:"value"`
+	EndTime FacebookTime `json:"end_time"`
 }
 
 // InsightsResponse represents page insights response
@@ -256,32 +256,33 @@ type User struct {
 
 // Comment represents a Facebook comment
 type Comment struct {
-	ID                 string    `json:"id"`
-	Message            string    `json:"message,omitempty"`
-	CreatedTime        FacebookTime `json:"created_time"`
-	From               User      `json:"from"`
-	LikeCount          int       `json:"like_count,omitempty"`
-	CommentCount       int       `json:"comment_count,omitempty"`
-	UserLikes          bool      `json:"user_likes,omitempty"`
-	CanLike            bool      `json:"can_like,omitempty"`
-	CanComment         bool      `json:"can_comment,omitempty"`
-	CanRemove          bool      `json:"can_remove,omitempty"`
-	CanHide            bool      `json:"can_hide,omitempty"`
-	IsHidden           bool      `json:"is_hidden,omitempty"`
-	IsPrivate          bool      `json:"is_private,omitempty"`
-	ParentID           string    `json:"parent,omitempty"`
-	Attachment         Attachment `json:"attachment,omitempty"`
-	MessageTags        []MessageTag `json:"message_tags,omitempty"`
+	ID           string       `json:"id"`
+	Message      string       `json:"message,omitempty"`
+	CreatedTime  FacebookTime `json:"created_time"`
+	From         User         `json:"from"`
+	LikeCount    int          `json:"like_count,omitempty"`
+	CommentCount int          `json:"comment_count,omitempty"`
+	UserLikes    bool         `json:"user_likes,omitempty"`
+	CanLike      bool         `json:"can_like,omitempty"`
+	CanComment   bool         `json:"can_comment,omitempty"`
+	CanRemove    bool         `json:"can_remove,omitempty"`
+	CanHide      bool         `json:"can_hide,omitempty"`
+	IsHidden     bool         `json:"is_hidden,omitempty"`
+	IsPrivate    bool         `json:"is_private,omitempty"`
+	ParentID     string       `json:"parent,omitempty"`
+	Attachment   Attachment   `json:"attachment,omitempty"`
+	MessageTags  []MessageTag `json:"message_tags,omitempty"`
+	PermalinkURL string       `json:"permalink_url,omitempty"`
 }
 
 // Attachment represents a comment attachment
 type Attachment struct {
-	Type        string      `json:"type,omitempty"`
-	URL         string      `json:"url,omitempty"`
-	Media       Media       `json:"media,omitempty"`
-	Target      Target      `json:"target,omitempty"`
-	Title       string      `json:"title,omitempty"`
-	Description string      `json:"description,omitempty"`
+	Type        string `json:"type,omitempty"`
+	URL         string `json:"url,omitempty"`
+	Media       Media  `json:"media,omitempty"`
+	Target      Target `json:"target,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 // Media represents media in an attachment
@@ -313,14 +314,14 @@ type MessageTag struct {
 
 // CommentsResponse represents a paginated list of comments
 type CommentsResponse struct {
-	Data   []Comment  `json:"data"`
-	Paging PagingData `json:"paging,omitempty"`
+	Data    []Comment      `json:"data"`
+	Paging  PagingData     `json:"paging,omitempty"`
 	Summary CommentSummary `json:"summary,omitempty"`
 }
 
 // CommentSummary represents comment summary information
 type CommentSummary struct {
-	Order         string `json:"order,omitempty"`
-	TotalCount    int    `json:"total_count,omitempty"`
-	CanComment    bool   `json:"can_comment,omitempty"`
+	Order      string `json:"order,omitempty"`
+	TotalCount int    `json:"total_count,omitempty"`
+	CanComment bool   `json:"can_comment,omitempty"`
 }
