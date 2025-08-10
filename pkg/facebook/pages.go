@@ -125,7 +125,7 @@ func (c *Client) GetPostComments(postID string, limit int, order string, fields 
 	if len(fields) == 0 {
 		fields = []string{
 			"id", "message", "created_time", "from{id,name,picture}",
-			"like_count", "comment_count", "attachment",
+			"like_count", "comment_count", "attachment","permalink_url",
 		}
 	}
 	
